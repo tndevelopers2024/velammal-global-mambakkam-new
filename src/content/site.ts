@@ -176,10 +176,10 @@ export const hero = {
   ctaPrimary: "Apply Now",
   ctaVideo: "Play Video",
   ctaVideoLong: "Introduction Video",
-  videoUrl: "https://www.youtube.com/watch?v=xdUmama-Uu0",
-  videoId: "xdUmama-Uu0",
+  videoUrl: "https://www.youtube.com/watch?v=cEum4rrC0cs",
+  videoId: "cEum4rrC0cs",
   /** The ambient film behind the fold. Muted, looping, decorative. */
-  stageVideoId: "cBiSOycMdTs",
+  stageVideoId: "cEum4rrC0cs",
   /** Painted first so the LCP is an image; the film fades in over it. */
   image: {
     src: "/img/hero-campus.jpg",
@@ -187,6 +187,37 @@ export const hero = {
     width: 1366,
     height: 540,
   },
+} as const;
+
+export const heroVideos = {
+  eyebrow: "Campus Life",
+  heading: "Glimpses of Velammal",
+  sub: "Explore our featured videos to get a look into the vibrant environment, academic excellence, and holistic development at Velammal Global School.",
+  videos: [
+    { id: "Qn22prv-aB4", title: "Velammal Global School - Video 1" },
+    { id: "5S2nqyoI-0s", title: "Velammal Global School - Video 2" },
+    { id: "e1a4LrbRZfg", title: "Velammal Global School - Video 3" },
+    { id: "GgCgeRWmb2o", title: "Velammal Global School - Video 4" },
+    { id: "BwLJ4bnTypw", title: "Velammal Global School - Video 5" },
+    { id: "14lxQesoQug", title: "Velammal Global School - Video 6" },
+  ]
+} as const;
+
+export const instagramReels = {
+  eyebrow: "Socials",
+  heading: "Follow our Journey",
+  sub: "Stay updated with the latest events, student achievements, and campus moments by following us on Instagram.",
+  reels: [
+    "DbkJwXPPH4P",
+    "DbdDljQPQMt",
+    "Da70q-DKFSe",
+    "Da2vrGBqt6k",
+    "DYyrxfRAVbI",
+    "DXjC3DyAIyx",
+    "DX_aO3EAW1q",
+    "DXGbU4CDLCZ",
+    "DW1AB3VE239",
+  ],
 } as const;
 
 /* ----------------------------------------------------------- facts bar */

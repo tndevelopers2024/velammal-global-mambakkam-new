@@ -13,6 +13,8 @@ import { Updates } from "@/components/sections/Updates";
 import { Alumni } from "@/components/sections/Alumni";
 import { Faq } from "@/components/sections/Faq";
 import { ClosingCta } from "@/components/sections/ClosingCta";
+import { VideoSlider } from "@/components/sections/VideoSlider";
+import { InstagramSlider } from "@/components/sections/InstagramSlider";
 
 export default function Page() {
   return (
@@ -28,6 +30,8 @@ export default function Page() {
         <GroupAdvantage />
         <Updates />
         <Alumni />
+        <VideoSlider />
+        <InstagramSlider />
         <Faq />
         <ClosingCta />
       </main>
