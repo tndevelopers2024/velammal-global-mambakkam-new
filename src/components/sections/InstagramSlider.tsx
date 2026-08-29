@@ -74,27 +74,22 @@ export function InstagramSlider() {
               <li key={index} className="min-w-0 shrink-0 flex-[0_0_85vw] pl-5 sm:flex-[0_0_50vw] md:flex-[0_0_40vw] lg:flex-[0_0_20%]">
                 <div className="relative w-full overflow-hidden rounded-2xl bg-paper-3 shadow-[var(--shadow-card)] transition-transform duration-500 hover:scale-[1.02]">
                   
-                  {/* The Glass Overlay for Smooth Dragging and Click-out */}
+                  {/* Invisible Overlay for Clicking and Dragging */}
                   <button 
                     type="button"
                     onClick={() => setActiveReelId(filename)}
-                    className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]"
-                    aria-label="View Reel on Instagram"
-                  >
-                    <span className="flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md px-6 py-3 text-sm font-medium text-white border border-white/40 shadow-lg">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                      </svg>
-                      Play Reel
-                    </span>
-                  </button>
+                    className="absolute inset-0 z-20 w-full h-full cursor-pointer transition-colors duration-300 hover:bg-black/10"
+                    aria-label="Play Reel"
+                  />
 
                   {/* The Video Preview */}
                   <div className="relative z-10 w-full pt-[177.77%] pointer-events-none bg-black">
                     <video
-                      src={`/videos/${filename}#t=999`}
+                      src={`/videos/${filename}`}
                       className="absolute inset-0 w-full h-full object-cover"
                       muted
+                      autoPlay
+                      loop
                       playsInline
                     />
                   </div>
