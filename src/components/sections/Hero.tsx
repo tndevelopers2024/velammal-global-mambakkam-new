@@ -10,19 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
-const PLAYER = new URLSearchParams({
-  autoplay: "1",
-  mute: "1",
-  loop: "1",
-  playlist: hero.stageVideoId,
-  controls: "0",
-  disablekb: "1",
-  modestbranding: "1",
-  playsinline: "1",
-  rel: "0",
-  iv_load_policy: "3",
-  fs: "0",
-}).toString();
+
 
 /**
  * The fold is a film, not a photograph.
@@ -42,6 +30,57 @@ export function Hero() {
   const [videoOpen, setVideoOpen] = useState(false);
   const [filmReady, setFilmReady] = useState(false);
   const reduced = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (reduced) return;
+
+    let player: any;
+
+    (window as any).onYouTubeIframeAPIReady = () => {
+      player = new (window as any).YT.Player("vgs-hero-yt-player", {
+        videoId: hero.stageVideoId,
+        host: "https://www.youtube-nocookie.com",
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          disablekb: 1,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          fs: 0,
+          iv_load_policy: 3,
+        },
+        events: {
+          onReady: (e: any) => {
+            e.target.playVideo();
+            // Wait for the video to buffer the first frame so we skip the black loading box
+            window.setTimeout(() => setFilmReady(true), 1500);
+          },
+          onStateChange: (e: any) => {
+            if (e.data === (window as any).YT.PlayerState.ENDED) {
+              e.target.playVideo(); // Loop without the playlist param!
+            }
+          },
+        },
+      });
+    };
+
+    if (!(window as any).YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    } else if ((window as any).YT.Player) {
+      (window as any).onYouTubeIframeAPIReady();
+    }
+
+    return () => {
+      if (player && typeof player.destroy === "function") {
+        player.destroy();
+      }
+    };
+  }, [reduced]);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -66,19 +105,13 @@ export function Hero() {
       >
         <div className="vgs-stage">
           <div className="vgs-stage__frame">
-            <iframe
+            <div
               className="vgs-stage__player"
               data-ready={filmReady ? "true" : "false"}
-              src={`https://www.youtube-nocookie.com/embed/${hero.stageVideoId}?${PLAYER}`}
-              title=""
               aria-hidden="true"
-              tabIndex={-1}
-              allow="autoplay; encrypted-media; picture-in-picture"
-              onLoad={() => {
-                // Show the video as soon as possible
-                window.setTimeout(() => setFilmReady(true), 100);
-              }}
-            />
+            >
+              <div id="vgs-hero-yt-player" className="absolute inset-0 h-full w-full pointer-events-none" />
+            </div>
           </div>
         </div>
       </m.div>
