@@ -23,8 +23,8 @@ export default function Page() {
       <Nav />
       <main id="main">
         <Hero />
-        <VideoSlider />
         <FactsBar />
+        <VideoSlider />
         <WhyConsider />
         <Gallery />
         <Highlights />
