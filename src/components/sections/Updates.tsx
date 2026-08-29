@@ -14,7 +14,7 @@ export function Updates() {
       <div className="container-page">
         <div className="grid-12">
           <div className="col-span-12 lg:col-span-6">
-            <Eyebrow index="05">Journal</Eyebrow>
+            <Eyebrow index="06">Journal</Eyebrow>
             <SectionHeading
               className="mt-7"
               text={updates.heading}

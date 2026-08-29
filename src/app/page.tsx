@@ -23,6 +23,7 @@ export default function Page() {
       <Nav />
       <main id="main">
         <Hero />
+        <VideoSlider />
         <FactsBar />
         <WhyConsider />
         <Gallery />
@@ -30,7 +31,6 @@ export default function Page() {
         <GroupAdvantage />
         <Updates />
         <Alumni />
-        <VideoSlider />
         <InstagramSlider />
         <Faq />
         <ClosingCta />

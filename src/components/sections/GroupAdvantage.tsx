@@ -28,7 +28,7 @@ export function GroupAdvantage() {
       <div className="container-page">
         <div className="grid-12">
           <div className="col-span-12 lg:col-span-7">
-            <Eyebrow index="04">The network</Eyebrow>
+            <Eyebrow index="05">The network</Eyebrow>
             <SectionHeading
               className="mt-7"
               text={groupAdvantage.heading}

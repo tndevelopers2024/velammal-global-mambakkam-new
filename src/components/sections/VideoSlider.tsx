@@ -29,7 +29,7 @@ export function VideoSlider() {
     >
       <div className="container-page flex flex-col md:flex-row md:items-end md:justify-between gap-8 relative z-20">
         <div>
-          <Eyebrow index="08">{heroVideos.eyebrow}</Eyebrow>
+          <Eyebrow index="01">{heroVideos.eyebrow}</Eyebrow>
           <SplitText
             as="h2"
             text={heroVideos.heading}

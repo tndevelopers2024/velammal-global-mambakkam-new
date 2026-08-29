@@ -45,7 +45,7 @@ export function WhyConsider() {
           style={pinned && !reduced ? { opacity: headingOpacity } : undefined}
         >
           <div className="col-span-12 lg:col-span-7">
-            <Eyebrow index="01">Why Velammal</Eyebrow>
+            <Eyebrow index="02">Why Velammal</Eyebrow>
             <SectionHeading
               className="mt-7"
               text={whyConsider.heading}

@@ -26,7 +26,7 @@ export function InstagramSlider() {
     >
       <div className="container-page flex flex-col md:flex-row md:items-end md:justify-between gap-8 relative z-20">
         <div>
-          <Eyebrow index="09">{instagramReels.eyebrow}</Eyebrow>
+          <Eyebrow index="08">{instagramReels.eyebrow}</Eyebrow>
           <SplitText
             as="h2"
             text={instagramReels.heading}
@@ -70,14 +70,14 @@ export function InstagramSlider() {
         <div className="overflow-hidden" ref={emblaRef}>
           {/* Embla Carousel Container */}
           <ul className="flex touch-pan-y -ml-5 py-4">
-            {instagramReels.reels.map((id, index) => (
+            {instagramReels.videos.map((filename, index) => (
               <li key={index} className="min-w-0 shrink-0 flex-[0_0_85vw] pl-5 sm:flex-[0_0_50vw] md:flex-[0_0_40vw] lg:flex-[0_0_20%]">
                 <div className="relative w-full overflow-hidden rounded-2xl bg-paper-3 shadow-[var(--shadow-card)] transition-transform duration-500 hover:scale-[1.02]">
                   
                   {/* The Glass Overlay for Smooth Dragging and Click-out */}
                   <button 
                     type="button"
-                    onClick={() => setActiveReelId(id)}
+                    onClick={() => setActiveReelId(filename)}
                     className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]"
                     aria-label="View Reel on Instagram"
                   >
@@ -89,14 +89,13 @@ export function InstagramSlider() {
                     </span>
                   </button>
 
-                  {/* The Iframe */}
-                  <div className="relative z-10 w-full pt-[177.77%] pointer-events-none">
-                    <iframe
-                      src={`https://www.instagram.com/reel/${id}/embed`}
-                      className="absolute inset-0 w-full h-full border-none"
-                      scrolling="no"
-                      allowTransparency={true}
-                      loading="lazy"
+                  {/* The Video Preview */}
+                  <div className="relative z-10 w-full pt-[177.77%] pointer-events-none bg-black">
+                    <video
+                      src={`/videos/${filename}#t=999`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      muted
+                      playsInline
                     />
                   </div>
                 </div>
@@ -123,7 +122,7 @@ export function InstagramSlider() {
       </div>
 
       <Lightbox
-        instagramId={activeReelId || ""}
+        localVideoSrc={activeReelId ? `/videos/${activeReelId}` : undefined}
         title="Instagram Reel"
         open={activeReelId !== null}
         onClose={() => setActiveReelId(null)}

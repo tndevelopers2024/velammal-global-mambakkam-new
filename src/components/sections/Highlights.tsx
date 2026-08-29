@@ -16,7 +16,7 @@ export function Highlights() {
       <div className="container-page">
         <div className="grid-12">
           <div className="col-span-12 lg:col-span-6">
-            <Eyebrow index="03">{highlights.eyebrowTitle}</Eyebrow>
+            <Eyebrow index="04">{highlights.eyebrowTitle}</Eyebrow>
             <SectionHeading
               className="mt-7"
               text={highlights.heading}

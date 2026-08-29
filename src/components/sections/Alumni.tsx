@@ -13,7 +13,7 @@ export function Alumni() {
       aria-label={alumni.heading}
     >
       <div className="container-page">
-        <Eyebrow index="06">Where they are now</Eyebrow>
+        <Eyebrow index="07">Where they are now</Eyebrow>
         <SectionHeading
           className="mt-7"
           text={alumni.heading}

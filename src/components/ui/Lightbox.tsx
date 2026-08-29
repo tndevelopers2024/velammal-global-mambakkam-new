@@ -9,12 +9,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export function Lightbox({
   videoId,
   instagramId,
+  localVideoSrc,
   title,
   open,
   onClose,
 }: {
   videoId?: string;
   instagramId?: string;
+  localVideoSrc?: string;
   title: string;
   open: boolean;
   onClose: () => void;
@@ -38,7 +40,7 @@ export function Lightbox({
     onClose();
   }, [onClose]);
 
-  const isInsta = !!instagramId;
+  const isInsta = !!instagramId || !!localVideoSrc;
 
   return (
     <dialog
@@ -48,7 +50,7 @@ export function Lightbox({
         if (e.target === ref.current) handleClose();
       }}
       aria-label={title}
-      className={`m-auto ${isInsta ? "w-[min(96vw,500px)]" : "w-[min(96vw,1200px)]"} rounded-panel bg-transparent p-0 text-fg`}
+      className={`m-auto ${isInsta ? "w-[min(96vw,500px,calc(85vh*9/16))]" : "w-[min(96vw,1200px,calc(85vh*16/9))]"} rounded-panel bg-transparent p-0 text-fg backdrop:bg-black/60 backdrop:backdrop-blur-sm`}
     >
       <div className="relative">
         <button
@@ -64,7 +66,15 @@ export function Lightbox({
         </button>
         <div className={`${isInsta ? "aspect-[9/16]" : "aspect-video"} w-full overflow-hidden rounded-panel bg-paper-3 shadow-[var(--shadow-lift)]`}>
           {mounted ? (
-            isInsta ? (
+            localVideoSrc ? (
+              <video
+                src={localVideoSrc}
+                className="size-full object-contain bg-black"
+                controls
+                autoPlay
+                playsInline
+              />
+            ) : instagramId ? (
               <iframe
                 className="size-full bg-white"
                 src={`https://www.instagram.com/reel/${instagramId}/embed`}

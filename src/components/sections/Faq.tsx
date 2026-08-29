@@ -85,7 +85,7 @@ export function Faq() {
       <div className="container-page">
         <div className="grid-12 items-end">
           <div className="col-span-12 lg:col-span-6">
-            <Eyebrow index="07">Admissions</Eyebrow>
+            <Eyebrow index="09">Admissions</Eyebrow>
             <SectionHeading
               className="mt-7"
               text={faq.heading}

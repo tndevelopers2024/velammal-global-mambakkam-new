@@ -40,7 +40,7 @@ function GalleryHeader({ counter = false }: { counter?: boolean }) {
           {String(gallery.images.length).padStart(2, "0")}
         </span>
       ) : null}
-      <Eyebrow index="02">Campus life</Eyebrow>
+      <Eyebrow index="03">Campus life</Eyebrow>
       <SplitText
         as="h2"
         text={gallery.heading}
