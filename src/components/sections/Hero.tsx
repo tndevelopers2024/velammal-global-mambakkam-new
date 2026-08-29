@@ -41,17 +41,7 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const [videoOpen, setVideoOpen] = useState(false);
   const [filmReady, setFilmReady] = useState(false);
-  const [mountFilm, setMountFilm] = useState(false);
   const reduced = usePrefersReducedMotion();
-
-  // The film waits for the preloader to clear so it is never competing with
-  // the curtain for bandwidth on a cold load.
-  useEffect(() => {
-    if (reduced) return;
-    const warm = document.documentElement.dataset.warm === "1";
-    const id = window.setTimeout(() => setMountFilm(true), warm ? 240 : 1600);
-    return () => window.clearTimeout(id);
-  }, [reduced]);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -76,33 +66,19 @@ export function Hero() {
       >
         <div className="vgs-stage">
           <div className="vgs-stage__frame">
-            <Image
-              src={hero.image.src}
-              alt={hero.image.alt}
-              fill
-              preload
-              fetchPriority="high"
-              quality={70}
-              sizes="100vw"
-              className="scale-105 object-cover object-center"
+            <iframe
+              className="vgs-stage__player"
+              data-ready={filmReady ? "true" : "false"}
+              src={`https://www.youtube-nocookie.com/embed/${hero.stageVideoId}?${PLAYER}`}
+              title=""
+              aria-hidden="true"
+              tabIndex={-1}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              onLoad={() => {
+                // Show the video as soon as possible
+                window.setTimeout(() => setFilmReady(true), 100);
+              }}
             />
-            {mountFilm ? (
-              <iframe
-                className="vgs-stage__player"
-                data-ready={filmReady ? "true" : "false"}
-                src={`https://www.youtube-nocookie.com/embed/${hero.stageVideoId}?${PLAYER}`}
-                title=""
-                aria-hidden="true"
-                tabIndex={-1}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                loading="lazy"
-                onLoad={() => {
-                  // the player reports load before the first frame decodes;
-                  // hold a beat so the fade never crosses a black frame
-                  window.setTimeout(() => setFilmReady(true), 1200);
-                }}
-              />
-            ) : null}
           </div>
         </div>
       </m.div>
@@ -114,27 +90,12 @@ export function Hero() {
         className="absolute inset-x-0 top-0 z-[1] h-[62svh] bg-[linear-gradient(to_top,var(--paper)_0%,color-mix(in_srgb,var(--paper)_58%,transparent)_38%,color-mix(in_srgb,var(--paper)_12%,transparent)_100%)] md:hidden"
       />
       {/* Desktop: a left-weighted paper wash carries the reading column while
-          the film stays open across the right of the frame — a directional
-          sweep for the overall balance, plus an elliptical pool anchored to
-          the copy itself so the paragraph is legible at every width rather
-          than only at the one this was composed on. */}
+          the film stays open across the right of the frame. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-[1] hidden md:block md:bg-[linear-gradient(100deg,var(--paper)_0%,color-mix(in_srgb,var(--paper)_93%,transparent)_30%,color-mix(in_srgb,var(--paper)_58%,transparent)_54%,color-mix(in_srgb,var(--paper)_14%,transparent)_76%,transparent_92%)]"
+        className="absolute inset-0 z-[1] hidden md:block md:bg-[linear-gradient(90deg,var(--paper)_0%,var(--paper)_40%,transparent_60%)]"
       />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-[1] hidden md:block md:bg-[radial-gradient(78%_88%_at_2%_56%,var(--paper)_0%,color-mix(in_srgb,var(--paper)_86%,transparent)_44%,color-mix(in_srgb,var(--paper)_34%,transparent)_74%,transparent_100%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-[1] hidden md:block md:bg-[linear-gradient(to_top,var(--paper)_0%,color-mix(in_srgb,var(--paper)_52%,transparent)_16%,transparent_46%)]"
-      />
-      {/* a whisper of vignette so the film has a centre of gravity */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-[1] hidden md:block md:bg-[radial-gradient(118%_96%_at_74%_40%,transparent_0%,transparent_44%,color-mix(in_srgb,var(--paper)_46%,transparent)_100%)]"
-      />
+
 
       {/* the layer between film and copy: one architectural rule */}
       <div

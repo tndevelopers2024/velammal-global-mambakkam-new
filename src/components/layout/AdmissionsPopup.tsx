@@ -61,11 +61,19 @@ export function AdmissionsPopup() {
 
   useEffect(() => {
     if (alreadySeen()) return;
-    const t = window.setTimeout(() => {
-      markSeen();
-      setOpen(true);
-    }, DELAY_MS);
-    return () => window.clearTimeout(t);
+
+    const handleScroll = () => {
+      if (window.scrollY > window.innerHeight * 0.5) {
+        markSeen();
+        setOpen(true);
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {

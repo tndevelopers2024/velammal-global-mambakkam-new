@@ -179,7 +179,7 @@ export const hero = {
   videoUrl: "https://www.youtube.com/watch?v=cEum4rrC0cs",
   videoId: "cEum4rrC0cs",
   /** The ambient film behind the fold. Muted, looping, decorative. */
-  stageVideoId: "cEum4rrC0cs",
+  stageVideoId: "e1a4LrbRZfg",
   /** Painted first so the LCP is an image; the film fades in over it. */
   image: {
     src: "/img/hero-campus.jpg",
